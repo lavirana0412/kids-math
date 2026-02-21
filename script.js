@@ -37,7 +37,6 @@ function backToMenu() {
     document.getElementById("game").style.display = "none";
 }
 
-// Generate a simple question
 function generateQuestion(type) {
     let a = Math.floor(Math.random() * 20) + 1;
     let b = Math.floor(Math.random() * 20) + 1;
@@ -54,7 +53,7 @@ function generateQuestion(type) {
         currentAnswer = Math.floor(a / b);
         document.getElementById("question").innerText = `What is ${a * b} ÷ ${b}?`;
     } else if(type === "frac") {
-        currentAnswer = Math.floor(a / 2); 
+        currentAnswer = Math.floor(a / 2);
         document.getElementById("question").innerText = `What is 1/2 of ${a}?`;
     }
 }
