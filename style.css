@@ -1,20 +1,45 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
     text-align: center;
     margin-top: 50px;
-    background: #f0f8ff;
+    background: linear-gradient(to right, #ffe6f0, #ccf2ff);
+    transition: background 0.5s ease;
+}
+
+h1 {
+    color: #ff3399;
+    text-shadow: 2px 2px #ffccff;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-10px); }
 }
 
 button {
     margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
     cursor: pointer;
+    background: linear-gradient(to right, #ffcc33, #ff66cc);
+    color: white;
+    box-shadow: 2px 2px 5px #888888;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.2);
 }
 
 input {
-    padding: 5px;
-    font-size: 16px;
-    width: 100px;
+    padding: 10px;
+    font-size: 18px;
+    width: 120px;
     text-align: center;
+    border-radius: 5px;
+    border: 2px solid #ff66cc;
 }
