@@ -1,0 +1,21 @@
+function checkAnswer() {
+    let userAnswer = Number(document.getElementById("answer").value);
+    let feedback = document.getElementById("feedback");
+    let correctSound = new Audio('sounds/correct.mp3');
+    let wrongSound = new Audio('sounds/wrong.mp3');
+
+    if(userAnswer === currentAnswer) {
+        feedback.innerText = "Correct! 🎉";
+        feedback.style.color = "green";
+        correctSound.play();
+    } else {
+        feedback.innerText = `Oops! The correct answer is ${currentAnswer}`;
+        feedback.style.color = "red";
+        wrongSound.play();
+    }
+
+    generateQuestion(document.getElementById("question").innerText.includes("+") ? "add" :
+                     document.getElementById("question").innerText.includes("-") ? "sub" :
+                     document.getElementById("question").innerText.includes("×") ? "mul" :
+                     document.getElementById("question").innerText.includes("÷") ? "div" : "frac");
+}
