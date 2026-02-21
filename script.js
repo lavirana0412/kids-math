@@ -1,89 +1,73 @@
 let currentAnswer = 0;
-let score = 0;
-let currentType = '';
 
-function startGame(type) {
-    currentType = type;
-    generateQuestion();
+function startAddition() {
+    showGame();
+    generateQuestion("add");
 }
 
-function generateQuestion() {
-
-    let num1 = Math.floor(Math.random() * 10) + 1;
-    let num2 = Math.floor(Math.random() * 10) + 1;
-
-    let questionText = "";
-
-    if (currentType === 'add') {
-        currentAnswer = num1 + num2;
-        questionText = `${num1} + ${num2} = ?`;
-    }
-    else if (currentType === 'sub') {
-        currentAnswer = num1 - num2;
-        questionText = `${num1} - ${num2} = ?`;
-    }
-    else if (currentType === 'mul') {
-        currentAnswer = num1 * num2;
-        questionText = `${num1} × ${num2} = ?`;
-    }
-    else if (currentType === 'div') {
-        currentAnswer = num1;
-        questionText = `${num1 * num2} ÷ ${num2} = ?`;
-    }
-    else if (currentType === 'frac') {
-        currentAnswer = "1/2";
-        questionText = "Half of 1 is ?";
-    }
-
-    document.getElementById("question").innerText = questionText;
-
-    generateOptions();
+function startSubtraction() {
+    showGame();
+    generateQuestion("sub");
 }
 
-function generateOptions() {
-    let optionsDiv = document.getElementById("options");
-    optionsDiv.innerHTML = "";
+function startMultiplication() {
+    showGame();
+    generateQuestion("mul");
+}
 
-    for (let i = 0; i < 4; i++) {
-        let option = document.createElement("button");
-        let randomOption = currentAnswer + Math.floor(Math.random() * 5) - 2;
+function startDivision() {
+    showGame();
+    generateQuestion("div");
+}
 
-        if (i === 0) {
-            option.innerText = currentAnswer;
-            option.onclick = () => checkAnswer(currentAnswer);
-        } else {
-            option.innerText = randomOption;
-            option.onclick = () => checkAnswer(randomOption);
-        }
+function startFractions() {
+    showGame();
+    generateQuestion("frac");
+}
 
-        optionsDiv.appendChild(option);
+function showGame() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("game").style.display = "block";
+    document.getElementById("feedback").innerText = "";
+    document.getElementById("answer").value = "";
+}
+
+function backToMenu() {
+    document.getElementById("menu").style.display = "block";
+    document.getElementById("game").style.display = "none";
+}
+
+// Generate a simple question
+function generateQuestion(type) {
+    let a = Math.floor(Math.random() * 20) + 1;
+    let b = Math.floor(Math.random() * 20) + 1;
+    if(type === "add") {
+        currentAnswer = a + b;
+        document.getElementById("question").innerText = `What is ${a} + ${b}?`;
+    } else if(type === "sub") {
+        currentAnswer = a - b;
+        document.getElementById("question").innerText = `What is ${a} - ${b}?`;
+    } else if(type === "mul") {
+        currentAnswer = a * b;
+        document.getElementById("question").innerText = `What is ${a} × ${b}?`;
+    } else if(type === "div") {
+        currentAnswer = Math.floor(a / b);
+        document.getElementById("question").innerText = `What is ${a * b} ÷ ${b}?`;
+    } else if(type === "frac") {
+        currentAnswer = Math.floor(a / 2); 
+        document.getElementById("question").innerText = `What is 1/2 of ${a}?`;
     }
 }
 
-function checkAnswer(answer) {
-    if (answer == currentAnswer) {
-        document.getElementById("result").innerHTML = "🎉 Correct!";
-        document.getElementById("result").className = "correct";
-        score++;
+function checkAnswer() {
+    let userAnswer = Number(document.getElementById("answer").value);
+    if(userAnswer === currentAnswer) {
+        document.getElementById("feedback").innerText = "Correct! 🎉";
     } else {
-        document.getElementById("result").innerHTML = "Try Again!";
+        document.getElementById("feedback").innerText = `Oops! The correct answer is ${currentAnswer}`;
     }
-
-    document.getElementById("score").innerText = score;
-    setTimeout(generateQuestion, 1000);
-}
-
-function checkFillAnswer() {
-    let userAnswer = document.getElementById("answerBox").value;
-
-    if (userAnswer == currentAnswer) {
-        document.getElementById("result").innerHTML = "🎉 Correct!";
-        score++;
-    } else {
-        document.getElementById("result").innerHTML = "Try Again!";
-    }
-
-    document.getElementById("score").innerText = score;
-    document.getElementById("answerBox").value = "";
-    setTimeout(generateQuestion, 1000);
+    generateQuestion(document.getElementById("question").innerText.includes("+") ? "add" :
+                     document.getElementById("question").innerText.includes("-") ? "sub" :
+                     document.getElementById("question").innerText.includes("×") ? "mul" :
+                     document.getElementById("question").innerText.includes("÷") ? "div" : "frac");
 }
