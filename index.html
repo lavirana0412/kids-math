@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Kids Math Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to Kids Math Game!</h1>
-    <p>Choose a game below:</p>
-    <button onclick="alert('Addition Game coming soon!')">Addition</button>
-    <button onclick="alert('Subtraction Game coming soon!')">Subtraction</button>
-    <button onclick="alert('Multiplication Game coming soon!')">Multiplication</button>
+    <h1>Kids Math Game</h1>
+    
+    <div id="menu">
+        <button onclick="startAddition()">Addition</button>
+        <button onclick="startSubtraction()">Subtraction</button>
+        <button onclick="startMultiplication()">Multiplication</button>
+        <button onclick="startDivision()">Division</button>
+        <button onclick="startFractions()">Fractions</button>
+    </div>
+    
+    <div id="game" style="display:none;">
+        <h2 id="question"></h2>
+        <input type="number" id="answer" placeholder="Type your answer">
+        <button onclick="checkAnswer()">Submit</button>
+        <p id="feedback"></p>
+        <button onclick="backToMenu()">Back to Menu</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
