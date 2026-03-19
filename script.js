@@ -1,8 +1,22 @@
 let currentAnswer = 0;
 let solutionText = "";
+let currentOperation = "";
 
-// 🔹 Start Addition
+// 🔹 Show Question
+function showQuestion(questionText) {
+    document.getElementById("question").innerText = questionText;
+    document.getElementById("answer").value = "";
+    document.getElementById("feedback").innerText = "";
+    document.getElementById("solution").innerText = "";
+
+    document.getElementById("game").style.display = "block";
+    document.getElementById("menu").style.display = "none";
+}
+
+// 🔹 Addition
 function startAddition() {
+    currentOperation = "add";
+
     let a = Math.floor(Math.random() * 20) + 1;
     let b = Math.floor(Math.random() * 20) + 1;
 
@@ -12,8 +26,10 @@ function startAddition() {
     showQuestion(a + " + " + b);
 }
 
-// 🔹 Start Subtraction
+// 🔹 Subtraction
 function startSubtraction() {
+    currentOperation = "sub";
+
     let a = Math.floor(Math.random() * 20) + 1;
     let b = Math.floor(Math.random() * 20) + 1;
 
@@ -29,8 +45,10 @@ function startSubtraction() {
     showQuestion(a + " - " + b);
 }
 
-// 🔹 Start Multiplication
+// 🔹 Multiplication
 function startMultiplication() {
+    currentOperation = "mul";
+
     let a = Math.floor(Math.random() * 10) + 1;
     let b = Math.floor(Math.random() * 10) + 1;
 
@@ -40,27 +58,18 @@ function startMultiplication() {
     showQuestion(a + " × " + b);
 }
 
-// 🔹 Start Division
+// 🔹 Division
 function startDivision() {
-    let b = Math.floor(Math.random() * 10) + 1;
+    currentOperation = "div";
+
+    let divisor = Math.floor(Math.random() * 10) + 1;
     let answer = Math.floor(Math.random() * 10) + 1;
-    let a = b * answer; // ensures clean division
+    let dividend = divisor * answer;
 
     currentAnswer = answer;
-    solutionText = a + " ÷ " + b + " = " + answer;
+    solutionText = dividend + " ÷ " + divisor + " = " + answer;
 
-    showQuestion(a + " ÷ " + b);
-}
-
-// 🔹 Show Question
-function showQuestion(q) {
-    document.getElementById("question").innerText = q;
-    document.getElementById("answer").value = "";
-    document.getElementById("feedback").innerText = "";
-    document.getElementById("solution").innerText = "";
-
-    document.getElementById("game").style.display = "block";
-    document.getElementById("menu").style.display = "none";
+    showQuestion(dividend + " ÷ " + divisor);
 }
 
 // 🔹 Check Answer
@@ -73,9 +82,21 @@ function checkAnswer() {
         document.getElementById("feedback").innerText = "Wrong 😅";
     }
 
-    // Always show solution
     document.getElementById("solution").innerText =
         "Solution: " + solutionText;
+
+    // 🔥 Automatically next question
+    setTimeout(() => {
+        generateNextQuestion();
+    }, 1500);
+}
+
+// 🔹 Generate Next Question
+function generateNextQuestion() {
+    if (currentOperation === "add") startAddition();
+    else if (currentOperation === "sub") startSubtraction();
+    else if (currentOperation === "mul") startMultiplication();
+    else if (currentOperation === "div") startDivision();
 }
 
 // 🔹 Back to Menu
