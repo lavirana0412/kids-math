@@ -2,28 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kids Math Game</title>
+    <title>Kids Math Game 🎮</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Kids Math Game</h1>
-    
+
+    <h1>Kids Math Game 🎮</h1>
+
+    <!-- 🔹 MENU SECTION -->
     <div id="menu">
         <button onclick="startAddition()">Addition</button>
         <button onclick="startSubtraction()">Subtraction</button>
         <button onclick="startMultiplication()">Multiplication</button>
         <button onclick="startDivision()">Division</button>
-        <button onclick="startFractions()">Fractions</button>
-    </div>
-    
-    <div id="game" style="display:none;">
-        <h2 id="question"></h2>
-        <input type="number" id="answer" placeholder="Type your answer">
-        <button onclick="checkAnswer()">Submit</button>
-        <p id="feedback"></p>
-        <button onclick="backToMenu()">Back to Menu</button>
     </div>
 
+    <!-- 🔹 GAME SECTION -->
+    <div id="game" style="display: none;">
+        
+        <h2 id="question"></h2>
+
+        <input 
+            type="number" 
+            id="answer" 
+            placeholder="Type your answer"
+        >
+
+        <br><br>
+
+        <button onclick="checkAnswer()">Submit</button>
+
+        <!-- 🔹 Feedback -->
+        <p id="feedback"></p>
+
+        <!-- 🔹 Solution (VERY IMPORTANT) -->
+        <p id="solution"></p>
+
+        <button onclick="backToMenu()">Back to Menu</button>
+
+    </div>
+
+    <!-- 🔹 JavaScript file -->
     <script src="script.js"></script>
+
 </body>
 </html>
